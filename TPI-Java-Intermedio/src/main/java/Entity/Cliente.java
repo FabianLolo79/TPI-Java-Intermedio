@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Setter
 
 @Entity
-@Table(name="cliente")
+@Table(name="clientes")
 public class Cliente {
 
     @Id
@@ -20,7 +20,7 @@ public class Cliente {
     private long id;
 
     private int cuit;
-    private String razonSocial;
+    private String razon_social;
     private String domicilio;
     private String ciudad;
     private String email;
