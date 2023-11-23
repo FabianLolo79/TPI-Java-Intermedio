@@ -27,4 +27,8 @@ public class Empleado {
     private List<Especialidad> especialidades;
 
     //Faltaria establecer la relacion one to many con tecnicos
+
+    //rol ENUM
+    // alta date
+    // baja date
 }
