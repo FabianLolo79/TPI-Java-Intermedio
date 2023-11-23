@@ -5,9 +5,9 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
-
+import java.util.Date;
+import java.util.Set;
+import java.util.HashSet;
 @Setter
 @Getter
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class Empleado {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String nombre;
@@ -24,11 +24,15 @@ public class Empleado {
     private String dni;
     private String email;
     private String telefono;
-    private List<Especialidad> especialidades;
-
-    //Faltaria establecer la relacion one to many con tecnicos
-
-    //rol ENUM
-    // alta date
-    // baja date
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+    private Date alta;
+    private Date baja;
+    @ManyToMany
+    @JoinTable(
+            name = "especialidades_has_empleados",
+            joinColumns = @JoinColumn(name="empleados_id"),
+            inverseJoinColumns = @JoinColumn(name="especialidades_id")
+    )
+    private Set<Especialidad> especialidades =new HashSet<Especialidad>();
 }
