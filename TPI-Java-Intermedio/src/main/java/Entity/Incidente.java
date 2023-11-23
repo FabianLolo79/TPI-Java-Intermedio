@@ -23,7 +23,7 @@ public class Incidente {
     //private DataTime create;
     private int aplicaciones_id;
 
-
+//Relaciones
     //ordenes_de_trabajo
     // private int ordenes_de_trabajo_id;
 
