@@ -1,11 +1,10 @@
-package Entity;
+package entity;
+
+
+
 import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 
 @Entity
 @Table(name="ordenes_de_trabajo")
