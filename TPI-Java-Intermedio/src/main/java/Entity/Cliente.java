@@ -3,10 +3,9 @@ package Entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,14 +15,20 @@ import javax.persistence.Table;
 public class Cliente {
 
     @Id
-    @GeneratedValue
-    private long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int cuit;
     private String razon_social;
     private String domicilio;
     private String ciudad;
     private String email;
     private String telefono;
+    @ManyToMany
+    @JoinTable(
+            name = "clientes_has_servicios",
+            joinColumns = @JoinColumn(name="clientes_id"),
+            inverseJoinColumns = @JoinColumn(name="servicios_id")
+    )
+    private Set<Servicio> servicios =new HashSet<Servicio>();
 
 }

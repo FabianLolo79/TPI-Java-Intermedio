@@ -4,6 +4,8 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Setter
 @Getter
 
@@ -12,22 +14,37 @@ import lombok.Setter;
 public class Incidente {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private long tecnico_id;
-    private int resolution_time;
-    private String status;
-    private String observacion_tecnico;
+    @ManyToOne
+    @JoinColumn(name = "empleados_id")
+    private Empleado tecnicoAsignado;
+
+    @Column(name = "resolution_time") // en horas
+    private int resolutionTime;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     private String descripcion;
-    //private DataTime create;
-    private int aplicaciones_id;
 
-//Relaciones
-    //ordenes_de_trabajo
-    // private int ordenes_de_trabajo_id;
+    @Column(name = "observation_tecnico")
+    private String observacionTecnico;
 
-    //empleados_id
-    //private int empleado_id;
+    @Column(name = "create_at")
+    private Date createAt;
+
+    @ManyToOne
+    @JoinColumn(name = "ordenes_trabajo_id")
+    private OrdenDeTrabajo ordenDeTrabajo;
+
+    @ManyToOne
+    @JoinColumn(name = "especialidades_id")
+    private String aplicacion;
+
+    @ManyToOne
+    @JoinColumn(name = "servicios_id")
+    private Servicio servicio;
 
 }

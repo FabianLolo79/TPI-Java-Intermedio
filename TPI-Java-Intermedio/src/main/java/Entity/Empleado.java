@@ -24,10 +24,16 @@ public class Empleado {
     private String dni;
     private String email;
     private String telefono;
+
     @Enumerated(EnumType.STRING)
     private Rol rol;
-    private Date alta;
-    private Date baja;
+
+    @Column(name = "alta")
+    private Date fechaAlta;
+
+    @Column(name = "baja")
+    private Date fechaBaja;
+
     @ManyToMany
     @JoinTable(
             name = "especialidades_has_empleados",
