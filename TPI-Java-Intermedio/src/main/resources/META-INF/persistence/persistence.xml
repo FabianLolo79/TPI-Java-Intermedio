@@ -4,11 +4,13 @@
     <persistence-unit name="JPA_PU" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-
-
         <!--  Clases MAPEADAS -->
-        <!-- <class> </class> -->
-
+        <class>Entity.Cliente</class>
+        <class>Entity.Empleado</class>
+        <class>Entity.Especialidad</class>
+        <class>Entity.Incidente</class>
+        <class>Entity.OrdenDeTrabajo</class>
+        <class>Entity.Servicio</class>
         <properties>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:mysql://localhost:3306/DATABASENAME?zeroDateTimeBehavior=convertToNull&amp;server Timezone=UTC"/>
