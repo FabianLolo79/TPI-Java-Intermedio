@@ -21,6 +21,6 @@ public interface RepositorioGenerico {
     void agregar(Object objeto);
     void actualizar(Object objeto);
     void eliminar(int id);
-    Servicio traerPorID(int id);
-    Set<Object> traerLista();
+    public Object traerPorID(int id);
+    public Set<Object> traerLista();
 }

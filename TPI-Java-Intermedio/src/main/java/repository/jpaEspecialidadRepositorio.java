@@ -1,39 +1,37 @@
 package repository;
 
 import java.util.Set;
-
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
-import dao.DAO;
-
+import entity.Especialidad;
 import entity.Servicio;
+import repository.dao.DAO;
 
-public class JpaServicioRepositorio implements RepositorioGenerico{
+public class jpaEspecialidadRepositorio implements RepositorioGenerico {
 
     private DAO dao;
 
     @Override
-    public void agregar(Object objServicio) {
-
-        Servicio servicio = (Servicio)objServicio;
+    public void agregar(Object objEspecialidad) {
 
         EntityManager em = dao.getEntityManager();
+        Especialidad especialidad = (Especialidad) objEspecialidad;
 
         try {
 
             em.getTransaction().begin();
-            em.persist(servicio);
+            em.persist(especialidad);
             em.flush();
             em.getTransaction().commit();
-            System.out.println("Servicio agregado");
+            System.out.println("Especialidad agregada");
         
         } catch (Exception e) {
 
             if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
-                System.out.println("No se pudo agregar servicio.");
+                System.out.println("No se pudo agregar la Especialidad.");
                 e.printStackTrace();
             }
 
@@ -44,33 +42,34 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
     }
 
     @Override
-    public void actualizar(Object objServicio) {
-        
+    public void actualizar(Object objEspecialidad) {
         EntityManager em = dao.getEntityManager();
-        Servicio servicio = (Servicio) objServicio;
+        Especialidad especialidad = (Especialidad) objEspecialidad;
 
         try {
+
             em.getTransaction().begin();
-            em.merge(servicio);
+            em.merge(especialidad);
             em.flush();
             em.getTransaction().commit();
-            System.out.println("Servicio actualizado");
+            System.out.println("Especialidad actualizada");
+        
         } catch (Exception e) {
+
             if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
-                System.out.println("No se pudo actualizar el servicio.");
+                System.out.println("No se pudo actualizar la Especialidad.");
                 e.printStackTrace();
             }
+
         }
         finally{
             em.close();
-            em.flush();
         }
     }
 
     @Override
     public void eliminar(int id) {
-        
         EntityManager em = dao.getEntityManager();
         try {
 
@@ -78,13 +77,13 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
             em.remove(id);
             em.flush();
             em.getTransaction().commit();
-            System.out.println("Servicio eliminado");
+            System.out.println("Especialidad eliminada");
         
         } catch (Exception e) {
         
             if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
-                System.out.println("No se pudo eliminar servicio.");
+                System.out.println("No se pudo eliminar la Especialidad.");
                 e.printStackTrace();
             }
 
@@ -96,12 +95,11 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
 
     @Override
     public Object traerPorID(int id) {
-        
-        System.out.println("Se trae servicio por id");
+        System.out.println("Se trae Especialidad por id");
         EntityManager em = dao.getEntityManager();
 
         try {
-            return em.find(Servicio.class, id);
+            return em.find(Especialidad.class, id);
         } 
         finally{
             em.close();
@@ -114,7 +112,7 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
         EntityManager em = dao.getEntityManager();
 
         try {
-            return em.createQuery("Select * from servicios", Servicio.class)
+            return em.createQuery("Select * from especialidades", Especialidad.class)
             .getResultStream()
             .collect(Collectors.toSet());
         }

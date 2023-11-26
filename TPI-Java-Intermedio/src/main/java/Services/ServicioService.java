@@ -26,10 +26,10 @@ public class ServicioService {
     }
 
     public Servicio traerPorID(int id) {
-       return this.servicioRepositorio.traerPorID(id);
+       return (Servicio)this.servicioRepositorio.traerPorID(id);
     }
 
-    public Set<Servicio> listaServicios() {
+    public Set<Servicio> listaServiciosSet() {
         Set<Servicio> setServicios = new HashSet<>();
         Set<Object> setObj = this.servicioRepositorio.traerLista();
         for (Object obj : setObj) {
