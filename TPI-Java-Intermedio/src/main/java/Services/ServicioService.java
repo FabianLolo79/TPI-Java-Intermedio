@@ -1,35 +1,43 @@
 package Services;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import entity.Servicio;
-import repository.ServicioRepositorio;
+import repository.RepositorioGenerico;
 
 public class ServicioService {
-    private ServicioRepositorio servicioRepositorio;
+    private RepositorioGenerico servicioRepositorio;
 
-    public ServicioService(ServicioRepositorio servicioRepositorio){
+    public ServicioService(RepositorioGenerico servicioRepositorio){
         this.servicioRepositorio = servicioRepositorio;
     }
 
     public void agregarServicio(Servicio servicio) {
-        this.servicioRepositorio.agregarServicio(servicio);;
+        this.servicioRepositorio.agregar(servicio);
     }
 
     public void actualizarServicio(Servicio servicio) {
-        this.servicioRepositorio.actualizarServicio(servicio);
+        this.servicioRepositorio.actualizar(servicio);
     }
 
     public void eliminarServicio(int id) {
-        this.servicioRepositorio.eliminarServicio(id);
+        this.servicioRepositorio.eliminar(id);
     }
 
     public Servicio traerPorID(int id) {
-       return this.servicioRepositorio.traerServicioPorID(id);
+       return this.servicioRepositorio.traerPorID(id);
     }
 
     public Set<Servicio> listaServicios() {
-        return this.servicioRepositorio.listaServicios();
+        Set<Servicio> setServicios = new HashSet<>();
+        Set<Object> setObj = this.servicioRepositorio.traerLista();
+        for (Object obj : setObj) {
+            Servicio servicio = (Servicio) obj;
+            setServicios.add(servicio);
+        }
+
+        return setServicios;
     }
 
 

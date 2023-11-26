@@ -1,24 +1,23 @@
 package repository;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
-
-import javax.persistence.EntityTransaction;
 
 import dao.DAO;
 
 import entity.Servicio;
 
-public class JpaServicioRepositorio implements ServicioRepositorio{
+public class JpaServicioRepositorio implements RepositorioGenerico{
 
     private DAO dao;
 
     @Override
-    public void agregarServicio(Servicio servicio) {
+    public void agregar(Object objServicio) {
+
+        Servicio servicio = (Servicio)objServicio;
 
         EntityManager em = dao.getEntityManager();
 
@@ -45,9 +44,10 @@ public class JpaServicioRepositorio implements ServicioRepositorio{
     }
 
     @Override
-    public void actualizarServicio(Servicio servicio) {
+    public void actualizar(Object objServicio) {
         
         EntityManager em = dao.getEntityManager();
+        Servicio servicio = (Servicio) objServicio;
 
         try {
             em.getTransaction().begin();
@@ -69,9 +69,12 @@ public class JpaServicioRepositorio implements ServicioRepositorio{
     }
 
     @Override
-    public void eliminarServicio(int id) {
+    public void eliminar(int id) {
         
         EntityManager em = dao.getEntityManager();
+        if(this.traerPorID(id) == null){
+            
+        }
 
         try {
 
@@ -96,7 +99,7 @@ public class JpaServicioRepositorio implements ServicioRepositorio{
     }
 
     @Override
-    public Servicio traerServicioPorID(int id) {
+    public Servicio traerPorID(int id) {
         
         System.out.println("Se trae servicio por id");
         EntityManager em = dao.getEntityManager();
@@ -110,7 +113,7 @@ public class JpaServicioRepositorio implements ServicioRepositorio{
     }
 
     @Override
-    public Set<Servicio> listaServicios() {
+    public Set<Object> traerLista() {
         
         EntityManager em = dao.getEntityManager();
 

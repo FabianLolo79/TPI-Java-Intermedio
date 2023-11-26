@@ -4,11 +4,13 @@ package entity;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
 
 @Entity
 @Table(name="ordenes_de_trabajo")

@@ -2,7 +2,7 @@ package entity;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Setter
 @Getter
-@Data
+@AllArgsConstructor
 
 @Entity
 @Table(name = "incidentes")
