@@ -1,9 +1,18 @@
 package entity;
 
 import javax.persistence.*;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.HashSet;
+//import java.util.Set;
+
+@Setter
+@Getter
+@Data
 
 @Entity
 @Table(name = "incidentes")
@@ -39,6 +48,12 @@ public class Incidente {
     @JoinColumn(name = "especialidades_id")
     private Especialidad aplicacion;
 
+    /*
+     * La relacion muchos a muchos con "Servicios" solo es necesaria si se 
+     * quiere listar los servicios con mas incidentes reportados,
+     * que no se pide en el tp.  se deja comentado para concenso de eliminacion
+     * Se dejan comentado los import set y hashset.
+     
     @ManyToMany
     @JoinTable(
             name = "servicios_has_incidentes",
@@ -46,6 +61,8 @@ public class Incidente {
             inverseJoinColumns = @JoinColumn(name = "servicio_id")
     )
     private Set<Servicio> servicios = new HashSet<>();
+
+    */
 
     // Constructor, getters, setters y otros métodos...
 
