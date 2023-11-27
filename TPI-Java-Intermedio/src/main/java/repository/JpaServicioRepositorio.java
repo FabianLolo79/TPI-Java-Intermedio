@@ -69,13 +69,14 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(Object objServicio) {
         
         EntityManager em = dao.getEntityManager();
+        Servicio servicio = (Servicio)objServicio;
         try {
 
             em.getTransaction().begin();
-            em.remove(id);
+            em.remove(servicio);
             em.flush();
             em.getTransaction().commit();
             System.out.println("Servicio eliminado");

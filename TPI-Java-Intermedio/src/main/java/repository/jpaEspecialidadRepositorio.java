@@ -69,12 +69,13 @@ public class jpaEspecialidadRepositorio implements RepositorioGenerico {
     }
 
     @Override
-    public void eliminar(int id) {
+    public void eliminar(Object objEspecialidad) {
         EntityManager em = dao.getEntityManager();
+        Especialidad especialidad = (Especialidad)objEspecialidad;
         try {
 
             em.getTransaction().begin();
-            em.remove(id);
+            em.remove(especialidad);
             em.flush();
             em.getTransaction().commit();
             System.out.println("Especialidad eliminada");

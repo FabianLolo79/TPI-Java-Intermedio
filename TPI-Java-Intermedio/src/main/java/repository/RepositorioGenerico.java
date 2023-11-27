@@ -20,7 +20,7 @@ import entity.Servicio;
 public interface RepositorioGenerico {
     void agregar(Object objeto);
     void actualizar(Object objeto);
-    void eliminar(int id);
+    void eliminar(Object objeto);
     public Object traerPorID(int id);
     public Set<Object> traerLista();
 }
