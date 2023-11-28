@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 
 import entity.Especialidad;
-import entity.Servicio;
+
 import repository.dao.DAO;
 
 public class jpaEspecialidadRepositorio implements RepositorioGenerico {

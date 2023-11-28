@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import entity.Especialidad;
-import entity.Servicio;
+
 import repository.RepositorioGenerico;
 
 public class EspecialidadService {
