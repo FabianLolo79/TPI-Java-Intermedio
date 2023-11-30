@@ -1,10 +1,9 @@
-import dao.DAO;
-import dao.JpaDAO;
+import repository.dao.*;
 
 public class AppPrincipal {
 
     public static void main(String[] args) {
-        DAO dao = new JpaDAO();
+        //DAO dao = new JpaDAO();
 
     }
 }

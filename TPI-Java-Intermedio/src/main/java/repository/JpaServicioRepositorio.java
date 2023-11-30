@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
-import dao.DAO;
-
+import entity.Incidente;
 import entity.Servicio;
+import repository.dao.DAO;
 
 public class JpaServicioRepositorio implements RepositorioGenerico{
 
@@ -98,11 +98,11 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
     @Override
     public Object traerPorID(int id) {
         
-        System.out.println("Se trae servicio por id");
+        System.out.println("Se trae incidente por id");
         EntityManager em = dao.getEntityManager();
 
         try {
-            return em.find(Servicio.class, id);
+            return em.find(Incidente.class, id);
         } 
         finally{
             em.close();

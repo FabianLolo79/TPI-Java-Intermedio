@@ -2,6 +2,8 @@ package entity;
 
 
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +22,15 @@ public class Especialidad {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "especialidad_id")
         private int id;
 
         private String especialidad;
+
+        @ManyToMany(mappedBy = "especialidades")
+        private Set<Empleado> empleados;
+
+        @ManyToOne
+        @JoinColumn(name = "servicio_id")
+        private Servicio servicio;
 }

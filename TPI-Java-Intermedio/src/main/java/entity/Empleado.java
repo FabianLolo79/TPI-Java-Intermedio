@@ -1,7 +1,5 @@
 package entity;
 
-
-
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +10,7 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 @Setter
 @Getter
@@ -25,6 +24,7 @@ public class Empleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "empleado_id")
     private int id;
 
     private String nombre;
@@ -44,9 +44,13 @@ public class Empleado {
 
     @ManyToMany
     @JoinTable(
-            name = "especialidades_has_empleados",
-            joinColumns = @JoinColumn(name="empleados_id"),
-            inverseJoinColumns = @JoinColumn(name="especialidades_id")
+            name = "empleado_has_especialidades",
+            joinColumns = @JoinColumn(name="empleado_id"),
+            inverseJoinColumns = @JoinColumn(name="especialidad_id")
     )
     private Set<Especialidad> especialidades =new HashSet<Especialidad>();
+
+    @OneToMany(mappedBy = "empleadoTecnico")
+    private List<Incidente> incidentesAsignados;
+
 }

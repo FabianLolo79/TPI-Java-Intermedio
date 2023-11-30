@@ -11,10 +11,12 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name="clientes")
@@ -22,6 +24,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cliente_id")
     private int id;
     private int cuit;
     private String razon_social;
@@ -37,4 +40,6 @@ public class Cliente {
     )
     private Set<Servicio> servicios =new HashSet<Servicio>();
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Incidente> incidentesSurgidos;
 }
