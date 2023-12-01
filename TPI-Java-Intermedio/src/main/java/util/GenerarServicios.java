@@ -42,7 +42,8 @@ public class GenerarServicios {
         
         this.listaServicios = List.of(servicio1, servicio2, servicio3);
         /*
-         * El primer string es el servicio, el resto de strings son las
+         * En cada array de Strings el primer string es el servicio, 
+         * el resto de strings son las
          * especialidades de ese servicio.
          */
         this.listaServicios.forEach(srv ->{
