@@ -30,8 +30,8 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
 
         try {
             
-            Query q = em.createQuery("Select e tecnicoAsignado from incidentes e where"
-                    +"datediff(now(), e.createat) <= :dias and status = :estado)"
+            Query q = em.createQuery("Select e.tecnicoAsignado from incidentes e where"
+                    +"datediff(now(), e.createat) <= :dias and e.status = :estado)"
                     +"groupby e.tecnicoAsignado"
                     +"orderby count(e) desc", Empleado.class);
                 q.setParameter("dias", dias);
@@ -45,19 +45,52 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
         finally{
             em.close();
         }
-        return null;
     }
 
     @Override
-    public Empleado tecnicoMayorIncidentesPorEspecialidad(Especialidad especialidad, int dias) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tecnicoMayorIncidentesPorEspecialidad'");
+    public Empleado tecnicoMayorIncidentesPorEspecialidad(Especialidad especialidad, int dias, Status estado) {
+        EntityManager em = dao.getEntityManager();
+
+        try {
+            
+            Query q = em.createQuery("Select i.tecnicoasignado from incidentes i where"
+                    +"datediff(now(), i.createat) <= :dias and i.status = :estado)"
+                    +"join i.especialidades e"
+                    +"where e.especialidad = :app"
+                    +"groupby e.tecnicoAsignado"
+                    +"orderby count(e) desc", Empleado.class);
+                q.setParameter("dias", dias);
+                q.setParameter("estado", estado.RESUELTO);
+                q.setParameter("app", especialidad.getEspecialidad());
+                q.setMaxResults(1);
+                return (Empleado) q.getSingleResult();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            em.close();
+        }
     }
 
     @Override
     public Empleado tecnicoMejorTiempoDeResolucionIncidentes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tecnicoMejorTiempoDeResolucionIncidentes'");
+       EntityManager em = this.dao.getEntityManager();
+
+       try {
+            Query q = em.createQuery("Select e.tecnicoasignado"
+            +"from incidentes e where e.status = :estado"
+            +"groupby e.resolutiontime"
+            +"orderby count(e) asc", Empleado.class);
+            q.setParameter("estado", Status.RESUELTO);
+            q.setMaxResults(1);
+            return (Empleado) q.getSingleResult();
+       } catch (Exception e) {
+        e.printStackTrace();
+       }
+       finally{
+        em.close();
+       }
     }
 
     @Override
@@ -152,6 +185,31 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
                 System.out.println("No se pudo eliminar el Incidente.");
                 e.printStackTrace();
             }
+        }
+        finally{
+            em.close();
+        }
+    }
+
+    @Override
+    public void altaAppIncidente(Especialidad app, int idIncidente, int tiempoEstimadoResolucion) {
+        EntityManager em = dao.getEntityManager();
+        Incidente incidente;
+
+        try {
+            incidente = em.find(Incidente.class, idIncidente);
+            incidente.getAplicaciones().add(app);
+            int colchon = incidente.getResolutionTime()+tiempoEstimadoResolucion;
+            incidente.setResolutionTime(colchon);
+            em.getTransaction().begin();
+            em.merge(incidente);
+            em.flush();
+            em.getTransaction().commit();
+            System.out.println("Se dio de alta nuevo problema en el incidente "+idIncidente
+            +"Se añadio"+tiempoEstimadoResolucion+" horas ya que el incidente es complejo");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         finally{
             em.close();

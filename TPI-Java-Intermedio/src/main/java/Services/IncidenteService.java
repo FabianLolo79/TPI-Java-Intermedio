@@ -52,7 +52,7 @@ public class IncidenteService{
         
     }
 
-    public Empleado tecnicoMayorIncidentesPorEspecialidad(Especialidad especialidad, int dias) {
+    public Empleado tecnicoMayorIncidentesPorEspecialidad(Especialidad especialidad, int dias, Status estado) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tecnicoMayorIncidentesPorEspecialidad'");
     }
