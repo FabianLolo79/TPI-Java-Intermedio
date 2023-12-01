@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class Empleado {
             joinColumns = @JoinColumn(name="empleado_id"),
             inverseJoinColumns = @JoinColumn(name="especialidad_id")
     )
-    private Set<Especialidad> especialidades =new HashSet<Especialidad>();
+    private Set<Especialidad> especialidades;
 
     @OneToMany(mappedBy = "empleadoTecnico")
     private List<Incidente> incidentesAsignados;

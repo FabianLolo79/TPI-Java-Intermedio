@@ -1,13 +1,19 @@
 package util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import entity.Empleado;
 import entity.Rol;
+
 import lombok.Getter;
 
-@Getter
 public class GenerarEmpleadosTecnicos {
-    private Set<Empleado> seEmpleadosTecnicos;
+    private Set<Empleado> setEmpleadosTecnicos;
     protected List<String[]> listaTecnicos;
 
     protected String tecnico1 = "RUBEN;GIL;22861213;rgil123@outlook.com;1169440539;TECNICO;27-03-2019;27-03-2020;null;null";
@@ -28,12 +34,27 @@ public class GenerarEmpleadosTecnicos {
     public GenerarEmpleadosTecnicos(){
         this.listaTecnicos = List.of(tcn1, tcn2, tcn3, tcn4, tcn5);
 
-        listaTecnicos.forEach(tcn ->agregarTecnicos());
+        listaTecnicos.forEach(tcn ->{
+            try {
+                agregarTecnicos(tcn);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
-    protected void agregarTecnicos() {
+    public Set<Empleado> getSetEmpleadosTecnicos(){
+        return this.setEmpleadosTecnicos;
+    }
+
+    protected void agregarTecnicos(String[] tcn) throws ParseException {
         Rol rol = Rol.valueOf(tcn[5]);
-        Empleado tecnico = new Empleado(0,tcn[0], tcn[1], tcn[2], tcn[3], tcn[4], rol, tcn[6], tcn[7], tcn[8], tcn[9]);
-        this.seEmpleadosTecnicos.add(tecnico);
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        Date fechaAlta = formato.parse(tcn[6]);
+        Date fechaBaja = formato.parse(tcn[7]);
+        Empleado tecnico = new Empleado(
+            0,tcn[0], tcn[1], tcn[2], tcn[3], tcn[4], rol, fechaAlta, fechaBaja, null, null
+            );
+        this.setEmpleadosTecnicos.add(tecnico);
     }
 }

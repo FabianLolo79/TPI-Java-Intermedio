@@ -38,7 +38,7 @@ public class Cliente {
             joinColumns = @JoinColumn(name="clientes_id"),
             inverseJoinColumns = @JoinColumn(name="servicios_id")
     )
-    private Set<Servicio> servicios =new HashSet<Servicio>();
+    private Set<Servicio> servicios ;
 
     @OneToMany(mappedBy = "cliente")
     private List<Incidente> incidentesSurgidos;

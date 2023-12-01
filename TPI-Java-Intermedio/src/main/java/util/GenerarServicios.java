@@ -2,14 +2,12 @@ package util;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import org.eclipse.persistence.internal.oxm.schema.model.List;
+import java.util.List;
 
 import entity.Especialidad;
 import entity.Servicio;
 import lombok.Getter;
 
-@Getter
 
 public class GenerarServicios {
     private Set<Servicio> setServicios;
@@ -24,13 +22,21 @@ public class GenerarServicios {
     protected String[] servicio2 = srv2.split(";");
 
     protected String srv3 = "Tango;Instalacion Tango;Migracion de version o servidor;Puesta en marcha y planeamiento;Desarrollo de interfaces";
-    protected String servicio3 = srv3.split(";");
+    protected String[] servicio3 = srv3.split(";");
 
     public GenerarServicios(){
         agregarServicios();
     }
 
-    protected Set<Servicio> agServicios() {
+    public Set<Servicio> getServicios(){
+        return this.setServicios;
+    }
+
+    public Set<Especialidad> getSetApps(){
+        return this.setApps;
+    }
+
+    protected Set<Servicio> agregarServicios() {
 
         Set<Servicio> servicios = new HashSet<>();
         Set<Especialidad> apps = new HashSet<>();
@@ -48,6 +54,6 @@ public class GenerarServicios {
             servicios.add(objServicio);
             }
         );
-        return this.servicio;
+        return this.setServicios;
     }
 }
