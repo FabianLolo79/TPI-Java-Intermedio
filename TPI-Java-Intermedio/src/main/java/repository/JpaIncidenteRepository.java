@@ -45,6 +45,7 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
         finally{
             em.close();
         }
+        return null;
     }
 
     @Override
@@ -71,6 +72,7 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
         finally{
             em.close();
         }
+        return null;
     }
 
     @Override
@@ -91,6 +93,7 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
        finally{
         em.close();
        }
+    return null;
     }
 
     @Override
@@ -141,7 +144,6 @@ public class JpaIncidenteRepository implements IncidenteRepository, RepositorioG
         finally{
             em.close();
         }
-    }
     }
 
     @Override

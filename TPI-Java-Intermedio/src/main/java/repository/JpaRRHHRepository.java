@@ -24,7 +24,7 @@ public class JpaRRHHRepository implements RRHHRepositorio{
             Query q = em.createQuery("Select e.tecnicoAsignado from incidentes e where"
                     +"datediff(now(), e.createat) = 0)"
                     +"orderby count(e) desc", Incidente.class);
-            return q.getResultList();
+            return (List<Incidente>)q.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }

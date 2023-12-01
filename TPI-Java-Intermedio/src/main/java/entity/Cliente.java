@@ -32,7 +32,7 @@ public class Cliente {
     private String ciudad;
     private String email;
     private String telefono;
-    @ManyToMany
+    @OneToMany
     @JoinTable(
             name = "clientes_has_servicios",
             joinColumns = @JoinColumn(name="clientes_id"),

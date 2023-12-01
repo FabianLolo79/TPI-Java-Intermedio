@@ -1,6 +1,5 @@
 package entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -25,12 +24,6 @@ public class Servicio {
     private int id;
 
     private String descripcion;
-
-    @ManyToMany(mappedBy = "servicios")
-    //En relacion muchos a muchos se establece el mapeo hacia el 
-    //nombre de la tabla (servicios)
-    private Set<Cliente> clientes = new HashSet<>(); 
-
     /*
      * CascadeType.ALL afecta a las operaciones persist, merge , remove,
      * etc realizadas en la entidad Servicio aplicara a la entidad Especialidad
