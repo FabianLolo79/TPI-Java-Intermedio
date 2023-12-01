@@ -28,7 +28,7 @@ public class GenerarServicios {
         agregarServicios();
     }
 
-    public Set<Servicio> getServicios(){
+    public Set<Servicio> getSetServicios(){
         return this.setServicios;
     }
 
@@ -38,20 +38,21 @@ public class GenerarServicios {
 
     protected Set<Servicio> agregarServicios() {
 
-        Set<Servicio> servicios = new HashSet<>();
-        Set<Especialidad> apps = new HashSet<>();
+        this.setServicios = new HashSet<>();
+        
         this.listaServicios = List.of(servicio1, servicio2, servicio3);
         /*
          * El primer string es el servicio, el resto de strings son las
          * especialidades de ese servicio.
          */
         this.listaServicios.forEach(srv ->{
-            Servicio objServicio = new Servicio(0,srv[0], apps);
+            
+            Servicio objServicio = new Servicio(0,srv[0], new HashSet<>());
             for (int i = 1; i < srv.length; i++) {
-                Especialidad especialidad = new Especialidad(0, srv[i], new HashSet<>(), objServicio);
-                objServicio.getEspecialidades().add(especialidad);
+                Especialidad especialidad = new Especialidad(0, srv[i]);
+                objServicio.getSetApps().add(especialidad);
             }
-            servicios.add(objServicio);
+            this.setServicios.add(objServicio);
             }
         );
         return this.setServicios;

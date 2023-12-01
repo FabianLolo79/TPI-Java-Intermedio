@@ -8,8 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 
 @Entity
 @Table(name="clientes")
@@ -26,7 +27,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cliente_id")
     private int id;
-    private int cuit;
+    private String cuit;
     private String razon_social;
     private String domicilio;
     private String ciudad;

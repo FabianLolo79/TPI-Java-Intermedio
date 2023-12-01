@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
@@ -27,10 +28,10 @@ public class Especialidad {
 
         private String especialidad;
 
-        @ManyToMany(mappedBy = "especialidades")
-        private Set<Empleado> empleados;
+        @Override
+        public String toString(){
+                return id+" "+especialidad;
+        }
 
-        @ManyToOne
-        @JoinColumn(name = "servicio_id")
-        private Servicio servicio;
+
 }

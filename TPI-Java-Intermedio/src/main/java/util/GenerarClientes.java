@@ -1,10 +1,10 @@
 package util;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import entity.Cliente;
-import lombok.Getter;
 
 
 public class GenerarClientes {
@@ -25,12 +25,13 @@ public class GenerarClientes {
     
     public GenerarClientes(){
         this.listaClientes = List.of(cl1, cl2, cl3, cl4);
+        this.setClientes = new HashSet<>();
 
         listaClientes.forEach(cl ->{
             Cliente cliente = new Cliente(
-                0, Integer.parseInt(cl[0]), cl[1], cl[2], cl[3], cl[4], cl[5], null, null
+                0, cl[0], cl[1], cl[2], cl[3], cl[4], cl[5], null, null
                 );
-            setClientes.add(cliente);
+            this.setClientes.add(cliente);
         });
     }
     

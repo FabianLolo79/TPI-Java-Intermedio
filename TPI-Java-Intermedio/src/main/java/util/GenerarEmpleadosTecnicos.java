@@ -33,6 +33,7 @@ public class GenerarEmpleadosTecnicos {
 
     public GenerarEmpleadosTecnicos(){
         this.listaTecnicos = List.of(tcn1, tcn2, tcn3, tcn4, tcn5);
+        this.setEmpleadosTecnicos = new HashSet<>();
 
         listaTecnicos.forEach(tcn ->{
             try {
@@ -52,9 +53,7 @@ public class GenerarEmpleadosTecnicos {
         SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
         Date fechaAlta = formato.parse(tcn[6]);
         Date fechaBaja = formato.parse(tcn[7]);
-        Empleado tecnico = new Empleado(
-            0,tcn[0], tcn[1], tcn[2], tcn[3], tcn[4], rol, fechaAlta, fechaBaja, null, null
-            );
+        Empleado tecnico = new Empleado(0,tcn[0], tcn[1], tcn[2], tcn[3], tcn[4], rol, fechaAlta, fechaBaja, null, null);
         this.setEmpleadosTecnicos.add(tecnico);
     }
 }

@@ -1,3 +1,7 @@
+import java.util.HashSet;
+import java.util.Set;
+
+import entity.Especialidad;
 import repository.dao.*;
 
 import util.*;
@@ -9,6 +13,11 @@ public class AppPrincipal {
         GenerarEmpleadosTecnicos tecnicos = new GenerarEmpleadosTecnicos();
         GenerarServicios servicios = new GenerarServicios();
 
-        clientes.getSetClientes();
+        clientes.getSetClientes().forEach(System.out:: println);
+        tecnicos.getSetEmpleadosTecnicos().forEach(System.out::println);
+        servicios.getSetServicios().forEach(serv ->{
+            System.out.println(serv.getDescripcion());
+            serv.getSetApps().forEach(System.out::println);            
+        });
     }
 }
