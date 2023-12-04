@@ -13,6 +13,9 @@ public class jpaEspecialidadRepositorio implements RepositorioGenerico {
 
     private DAO dao;
 
+    public jpaEspecialidadRepositorio(DAO dao){
+        this.dao = dao;
+    }
     @Override
     public void agregar(Object objEspecialidad) {
 

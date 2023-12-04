@@ -14,6 +14,10 @@ public class JpaServicioRepositorio implements RepositorioGenerico{
 
     private DAO dao;
 
+    public JpaServicioRepositorio(DAO dao){
+        this.dao = dao;
+    }
+
     @Override
     public void agregar(Object objServicio) {
 

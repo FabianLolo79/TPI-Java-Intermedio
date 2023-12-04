@@ -8,12 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
 
 @Entity
 @Table(name="servicios")
@@ -25,6 +25,10 @@ public class Servicio {
     private int id;
 
     private String descripcion;
+    public  Servicio(String descripcion, Set<Especialidad> setApps){
+        this.descripcion = descripcion;
+        this.setApps = setApps;
+    }
     /*
      * CascadeType.ALL afecta a las operaciones persist, merge , remove,
      * etc realizadas en la entidad Servicio aplicara a la entidad Especialidad
@@ -32,10 +36,8 @@ public class Servicio {
      * es decir, si elimino una especialidad de un servicio, y esa especialidad
      * no esta asociada a otro servicio, se elimina
      */
-    @OneToMany
-    //en esta relacion el mapeo se hace con el atributo servicio..
-    //de la clase Especialidad
-    @JoinColumn(name = "especialidad_id", referencedColumnName = "servicio_id")
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JoinColumn(name = "servicio_id")
     private Set<Especialidad> setApps;
     
     @Override

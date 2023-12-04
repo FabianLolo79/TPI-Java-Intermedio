@@ -2,15 +2,22 @@ package util;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import Services.EspecialidadService;
+import Services.ServicioService;
+
 import java.util.List;
 
 import entity.Especialidad;
 import entity.Servicio;
-import lombok.Getter;
+import repository.JpaServicioRepositorio;
+import repository.RepositorioGenerico;
+import repository.jpaEspecialidadRepositorio;
+import repository.dao.DAO;
 
 
 public class GenerarServicios {
-    private Set<Servicio> setServicios;
+
     private Set<Especialidad> setApps;
     protected List<String[]> listaServicios;
 
@@ -24,21 +31,19 @@ public class GenerarServicios {
     protected String srv3 = "Tango;Instalacion Tango;Migracion de version o servidor;Puesta en marcha y planeamiento;Desarrollo de interfaces";
     protected String[] servicio3 = srv3.split(";");
 
-    public GenerarServicios(){
-        agregarServicios();
-    }
+    public GenerarServicios(DAO dao){
 
-    public Set<Servicio> getSetServicios(){
-        return this.setServicios;
+        this.setApps = new HashSet<>();
+        agregarServicios(dao);
     }
 
     public Set<Especialidad> getSetApps(){
         return this.setApps;
     }
 
-    protected Set<Servicio> agregarServicios() {
-
-        this.setServicios = new HashSet<>();
+    protected void agregarServicios(DAO dao) {
+        RepositorioGenerico servicicioRepositorio = new JpaServicioRepositorio(dao);
+        ServicioService serviciosService = new ServicioService(servicicioRepositorio);
         
         this.listaServicios = List.of(servicio1, servicio2, servicio3);
         /*
@@ -47,15 +52,12 @@ public class GenerarServicios {
          * especialidades de ese servicio.
          */
         this.listaServicios.forEach(srv ->{
-            
-            Servicio objServicio = new Servicio(0,srv[0], new HashSet<>());
+            Servicio objServicio = new Servicio(srv[0], setApps);
+            serviciosService.agregarServicio(objServicio);
             for (int i = 1; i < srv.length; i++) {
-                Especialidad especialidad = new Especialidad(0, srv[i]);
-                objServicio.getSetApps().add(especialidad);
+                Especialidad app = new Especialidad(srv[i]);
+                objServicio.getSetApps().add(app);
             }
-            this.setServicios.add(objServicio);
-            }
-        );
-        return this.setServicios;
+        });
     }
 }

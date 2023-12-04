@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Setter
 @Getter
@@ -28,10 +27,12 @@ public class Especialidad {
 
         private String especialidad;
 
+        public Especialidad(String especialidad) {
+                this.especialidad = especialidad;
+        }
+
         @Override
         public String toString(){
                 return id+" "+especialidad;
         }
-
-
 }
