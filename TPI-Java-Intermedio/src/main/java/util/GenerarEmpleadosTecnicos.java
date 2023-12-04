@@ -10,8 +10,6 @@ import java.util.Set;
 import entity.Empleado;
 import entity.Rol;
 
-import lombok.Getter;
-
 public class GenerarEmpleadosTecnicos {
     private Set<Empleado> setEmpleadosTecnicos;
     protected List<String[]> listaTecnicos;
